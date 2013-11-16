@@ -1,0 +1,40 @@
+<h1>Listing messages</h1>
+
+<div class="folders">
+  <ul>
+    <li>
+      <%= link_to 'Inbox', messages_path %>
+      <%= unread_messages_count 'inbox' %>
+    </li>
+    <li>
+      <%= link_to 'Sent', messages_path(folder: 'sent') %>
+      <%= unread_messages_count 'sent' %>
+    </li>
+  </ul>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>Content</th>
+    <th>Recipient</th>
+    <th>Sender</th>
+    <th>Is read</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @messages.each do |message| %>
+      <tr>
+        <td><%= message.content %></td>
+        <td><%= message.recipient %></td>
+        <td><%= message.sender %></td>
+        <td><%= message.is_read %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Message', new_message_path %>
