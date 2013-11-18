@@ -34,4 +34,10 @@ class User < ActiveRecord::Base
   def to_s
     self.name
   end
+
+  class << self
+    def suggestions_for term
+      where("lower(name) like ?", "%#{term.downcase}%")
+    end
+  end
 end

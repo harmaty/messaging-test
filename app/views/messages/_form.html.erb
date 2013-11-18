@@ -5,12 +5,15 @@
       <%= f.text_area :content, :class => "form-control", :rows => "3" %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :recipient_id, 'To', :class => 'control-label' %>
-    <div class="controls">
-      <%= collection_select :message, :recipient_id, User.all, :id, :name %>
+
+    <%= f.hidden_field :recipient_id %>
+
+    <div class="control-group">
+      <%= f.label :recipient, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :recipient, placeholder: "Enter user's name" %>
+      </div>
     </div>
-  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

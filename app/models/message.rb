@@ -17,6 +17,7 @@ class Message < ActiveRecord::Base
 
   validates_presence_of :sender
   validates_presence_of :recipient
+  validates_presence_of :content
 
   scope :unread, ->{ where(is_read: false) }
 

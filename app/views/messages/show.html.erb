@@ -3,22 +3,24 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
+
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
-  <dd><%= @message.content %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:recipient_id) %>:</strong></dt>
-  <dd><%= @message.recipient_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sender_id) %>:</strong></dt>
-  <dd><%= @message.sender_id %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:is_read) %>:</strong></dt>
-  <dd><%= @message.is_read %></dd>
+  <dt><strong>To:</strong></dt>
+  <dd><%= @message.recipient %></dd>
+  <dt><strong>From:</strong></dt>
+  <dd><%= @message.sender %></dd>
+  <dt><strong>Sent at:</strong></dt>
+  <dd><%= @message.created_at %></dd>
 </dl>
+
+<div class="message_body">
+  <%= simple_format @message.content %>
+</div>
+
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               messages_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_message_path(@message), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               message_path(@message),
               :method => 'delete',

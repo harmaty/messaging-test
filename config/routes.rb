@@ -1,6 +1,7 @@
 MessagingTest::Application.routes.draw do
   devise_for :users
   resources :messages
+  get 'user_suggestions' => 'user_suggestions#index'
 
   root to: "messages#index"
 

@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :destroy]
-  before_filter :authenticate_user!
+  before_action :mark_as_read, only: [:show]
+  before_action :authenticate_user!
 
   # GET /messages
   # GET /messages.json
@@ -51,13 +52,19 @@ class MessagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_message
-      @message = current_user.messages.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_message
+    @message = current_user.messages.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def message_params
-      params.require(:message).permit(:content, :recipient_id).merge(sender_id: current_user.id)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def message_params
+    params.require(:message).permit(:content, :recipient_id).merge(sender_id: current_user.id)
+  end
+
+  def mark_as_read
+    if !@message.is_read? and @message.recipient_id == current_user.id
+      @message.update_attribute(:is_read, true)
     end
+  end
 end
