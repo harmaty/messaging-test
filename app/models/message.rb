@@ -6,7 +6,7 @@
 #  content      :text
 #  recipient_id :integer
 #  sender_id    :integer
-#  is_read      :boolean
+#  is_read      :boolean          default(FALSE)
 #  created_at   :datetime
 #  updated_at   :datetime
 #
