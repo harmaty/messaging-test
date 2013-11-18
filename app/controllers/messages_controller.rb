@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_message, only: [:show, :destroy]
   before_action :mark_as_read, only: [:show]
-  before_action :authenticate_user!
+
 
   # GET /messages
   # GET /messages.json
