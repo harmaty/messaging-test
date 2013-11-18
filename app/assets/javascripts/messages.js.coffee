@@ -3,8 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$(document).ready ->
+
+ready = ->
   $('#message_recipient').autocomplete
     source: '/user_suggestions.json'
     select: (ev, data)->
       $('#message_recipient_id').val(data.item.id)
+
+$(document).ready ready
+$(document).on 'page:load', ready

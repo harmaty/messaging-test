@@ -1,10 +1,22 @@
-<%= form_for @message, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :content, 'Message', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :content, :class => "form-control", :rows => "3" %>
+<%= form_for @message, :html => {:class => 'form-horizontal'} do |f| %>
+    <% if @message.errors.any? %>
+        <div class="alert alert-error" id="error_explanation">
+          <h4>Message was not sent:</h4>
+
+          <ul>
+            <% @message.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :content, 'Message', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :content, :class => "form-control", :rows => "3" %>
+      </div>
     </div>
-  </div>
 
     <%= f.hidden_field :recipient_id %>
 
@@ -15,9 +27,9 @@
       </div>
     </div>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                messages_path, :class => 'btn' %>
-  </div>
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  messages_path, :class => 'btn' %>
+    </div>
 <% end %>

@@ -1,11 +1,10 @@
 module MessagesHelper
-  def unread_messages_count folder
-
-    messages = current_user.send "#{folder}_messages"
-    count = messages.unread.count
+  def unread_inbox_messages_count
+    count = current_user.inbox_messages.unread.count
     if count > 0
-      "(#{count})"
+      " (#{count})"
+    else
+      ""
     end
-
   end
 end

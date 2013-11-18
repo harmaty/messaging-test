@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
               else
                 'inbox'
               end
-    @messages = current_user.send "#{@folder}_messages"
+    @messages = current_user.send("#{@folder}_messages").order(:created_at => :desc)
   end
 
   # GET /messages/1
